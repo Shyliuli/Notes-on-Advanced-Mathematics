@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高等数学（下）笔记精华</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 25px 40px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        h1, h2, h3, h4 {
+            color: #1a5f7a;
+            font-weight: 600;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+        h2 {
+            font-size: 2em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #57a0d3;
+        }
+        h3 {
+            font-size: 1.6em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #159895;
+        }
+        h4 {
+            font-size: 1.25em;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: #34495e;
+            display: block;
+            padding-left: 10px;
+            border-left: 4px solid #57a0d3;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 12px;
+        }
+        li::before {
+            content: "•";
+            color: #57a0d3;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        strong {
+            color: #002B5B;
+        }
+        code, .code-inline {
+            background-color: #e9ecef;
+            color: #c7254e;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.9em;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #dee2e6;
+            margin: 40px 0;
+        }
+        .example {
+            background-color: #eef7ff;
+            border-left: 5px solid #57a0d3;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .example-title {
+            font-weight: bold;
+            color: #1a5f7a;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .important {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .correction {
+            color: #f0ad4e;
+            font-weight: bold;
+        }
+        /* MathJax display math styling */
+        mjx-container[jax="CHTML"][display="true"] {
+            margin: 1em 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>高等数学（下）笔记精华整理</h1>
+    <hr>
+
+    <h2>第一部分：空间解析几何与向量代数</h2>
+
+    <section>
+        <h3>第一章：向量及其线性运算</h3>
+        <h4>1.1 向量的基本概念</h4>
+        <ul>
+            <li><strong>向量</strong>：既有大小又有方向的量，表示为 \(\vec{a}\) 或 \(\vec{AB}\)。</li>
+            <li><strong>向量的模</strong>：向量的大小或长度，记作 \(|\vec{a}|\)。</li>
+            <li><strong>单位向量</strong>：模为1的向量。与向量 \(\vec{a}\) 同向的单位向量为 \(\vec{e_a} = \frac{\vec{a}}{|\vec{a}|}\)。</li>
+            <li><strong>零向量</strong>：模为0的向量，方向是任意的。</li>
+            <li><strong>向量夹角</strong>：两个非零向量起点重合时，所形成的不大于 \(\pi\) 的角，记作 \(\phi\) (\(0 \le \phi \le \pi\))。</li>
+        </ul>
+
+        <h4>1.2 向量的线性运算</h4>
+        <ul>
+            <li><strong>加法</strong>：满足平行四边形法则和三角形法则。</li>
+            <li><strong>数乘</strong>：实数 \(\lambda\) 与向量 \(\vec{a}\) 的乘积 \(\lambda\vec{a}\)。</li>
+            <li><strong>向量共线（平行）的充要条件</strong>：对于非零向量 \(\vec{a}\) 和 \(\vec{b}\)，\(\vec{b} \parallel \vec{a}\) 的充要条件是存在唯一的实数 \(\lambda\)，使得 \(\vec{b} = \lambda\vec{a}\)。</li>
+        </ul>
+
+        <h4>1.3 空间直角坐标系与向量的坐标表示</h4>
+        <ul>
+            <li><strong>向量的坐标分解</strong>：\(\vec{r} = x\vec{i} + y\vec{j} + z\vec{k}\)，也可表示为 \(\vec{r} = (x, y, z)\)。</li>
+            <li><strong>向量的坐标运算</strong>：设 \(\vec{a} = (a_x, a_y, a_z)\)，\(\vec{b} = (b_x, b_y, b_z)\)
+                <ul>
+                    <li><strong>加法</strong>：\(\vec{a} + \vec{b} = (a_x + b_x, a_y + b_y, a_z + b_z)\)</li>
+                    <li><strong>数乘</strong>：\(\lambda\vec{a} = (\lambda a_x, \lambda a_y, \lambda a_z)\)</li>
+                </ul>
+            </li>
+            <li><strong>向量的模</strong>：\(|\vec{r}| = \sqrt{x^2 + y^2 + z^2}\)。</li>
+            <li><strong>两点间距离</strong>：点 \(A(x_1, y_1, z_1)\) 和 \(B(x_2, y_2, z_2)\) 之间的距离 \(|AB| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}\)。</li>
+            <li><strong>方向余弦</strong>：非零向量与三个坐标轴正向的夹角 \(\alpha, \beta, \gamma\) 的余弦值。
+                <ul>
+                    <li>\(\cos\alpha = \frac{x}{|\vec{r}|}\), \(\cos\beta = \frac{y}{|\vec{r}|}\), \(\cos\gamma = \frac{z}{|\vec{r}|}\)</li>
+                    <li><strong>性质</strong>：\(\cos^2\alpha + \cos^2\beta + \cos^2\gamma = 1\)</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>第二章：向量的乘法运算</h3>
+        <h4>2.1 数量积（点积）</h4>
+        <ul>
+            <li><strong>定义</strong>：\(\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| \cos\theta\)</li>
+            <li><strong>坐标表示</strong>：\(\vec{a} \cdot \vec{b} = a_x b_x + a_y b_y + a_z b_z\)</li>
+            <li><strong>应用</strong>：判断向量垂直。 \(\vec{a} \perp \vec{b} \Leftrightarrow \vec{a} \cdot \vec{b} = 0\)。</li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>已知 \(\vec{a} = (1, -2, m)\), \(\vec{b} = (3, n, 6)\)，若 \(\vec{a} \perp \vec{b}\)，则 \(\vec{a} \cdot \vec{b} = 1 \cdot 3 + (-2) \cdot n + 6m = 0\)，即 <code class="code-inline">3 - 2n + 6m = 0</code>。</p>
+        </div>
+
+        <h4>2.2 向量积（叉积）</h4>
+        <ul>
+            <li><strong>定义</strong>：\(\vec{c} = \vec{a} \times \vec{b}\)，结果是一个向量。
+                <ul>
+                    <li><strong>大小</strong>：\(|\vec{c}| = |\vec{a}| |\vec{b}| \sin\theta\)，等于以 \(\vec{a}, \vec{b}\) 为邻边的平行四边形面积。</li>
+                    <li><strong>方向</strong>：与 \(\vec{a}, \vec{b}\) 构成的平面垂直，符合右手定则。</li>
+                </ul>
+            </li>
+            <li><strong>坐标表示</strong>：\[\vec{a} \times \vec{b} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ a_x & a_y & a_z \\ b_x & b_y & b_z \end{vmatrix}\]</li>
+            <li><strong>应用</strong>：判断向量平行。\(\vec{a} \parallel \vec{b} \Leftrightarrow \vec{a} \times \vec{b} = \vec{0}\)。</li>
+        </ul>
+
+        <h4>2.3 混合积</h4>
+        <ul>
+            <li><strong>定义</strong>：\([\vec{a}\vec{b}\vec{c}] = (\vec{a} \times \vec{b}) \cdot \vec{c}\)</li>
+            <li><strong>几何意义</strong>：其绝对值等于以 \(\vec{a}, \vec{b}, \vec{c}\) 为邻棱的平行六面体的体积。</li>
+            <li><strong>坐标表示</strong>：\[[\vec{a}\vec{b}\vec{c}] = \begin{vmatrix} a_x & a_y & a_z \\ b_x & b_y & b_z \\ c_x & c_y & c_z \end{vmatrix}\]</li>
+            <li><strong>应用</strong>：判断三向量共面。 \([\vec{a}\vec{b}\vec{c}]=0 \Leftrightarrow \vec{a}, \vec{b}, \vec{c}\) 共面。</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>第三章：空间中的平面与直线</h3>
+        <h4>3.1 平面方程</h4>
+        <ul>
+            <li><strong>点法式</strong>: \(A(x-x_0) + B(y-y_0) + C(z-z_0) = 0\)
+                <ul>
+                    <li>\(\vec{n}=(A,B,C)\) 为法向量，\(M_0(x_0,y_0,z_0)\) 为平面上一点。</li>
+                </ul>
+            </li>
+            <li><strong>一般式</strong>: \(Ax+By+Cz+D=0\)</li>
+        </ul>
+
+        <h4>3.2 直线方程</h4>
+        <ul>
+            <li><strong>对称式/点向式</strong>: \(\frac{x-x_0}{m} = \frac{y-y_0}{n} = \frac{z-z_0}{p}\)
+                <ul>
+                    <li>\(\vec{s}=(m,n,p)\) 为方向向量，\(M_0(x_0,y_0,z_0)\) 为直线上一点。</li>
+                </ul>
+            </li>
+            <li><strong>参数式</strong>: \[\begin{cases} x = x_0 + mt \\ y = y_0 + nt \\ z = z_0 + pt \end{cases}\]</li>
+            <li><strong>一般式</strong>: 两平面交线 \[\begin{cases} A_1x+B_1y+C_1z+D_1=0 \\ A_2x+B_2y+C_2z+D_2=0 \end{cases}\]。方向向量 \(\vec{s} = \vec{n_1} \times \vec{n_2}\)。</li>
+        </ul>
+    </section>
+
+    <hr>
+    <h2>第二部分：多元函数微分学</h2>
+
+    <section>
+        <h3>第四章：多元函数基本概念</h3>
+        <h4>4.1 极限与连续</h4>
+        <ul>
+            <li><strong>极限</strong>: \(\lim_{(x,y) \to (x_0,y_0)} f(x,y) = A\) 指点 \((x,y)\) <strong>以任何方式</strong>趋近于 \((x_0,y_0)\) 时，函数值都趋近于A。</li>
+            <li><strong>判断极限不存在的方法</strong>: 寻找两条不同路径，若极限值不同，则原极限不存在。</li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>证明极限 \(\lim_{(x,y) \to (0,0)} \frac{xy}{x^2+y^2}\) 不存在。</p>
+            <span class="example-title">解:</span>
+            <p>沿路径 \(y=kx\) 趋近于 (0,0)。</p>
+            <p>原式 = \(\lim_{x \to 0} \frac{x(kx)}{x^2+(kx)^2} = \lim_{x \to 0} \frac{kx^2}{x^2(1+k^2)} = \frac{k}{1+k^2}\)。</p>
+            <p>极限值依赖于路径的斜率k，故极限不存在。</p>
+        </div>
+        <ul>
+            <li><strong>连续</strong>: 若 \(\lim_{(x,y) \to (x_0,y_0)} f(x,y) = f(x_0,y_0)\)，则函数在该点连续。</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>第五章：偏导数与全微分</h3>
+        <h4>5.1 偏导数</h4>
+        <ul>
+            <li><strong>定义</strong>: 对一个自变量求导，将其他自变量视为<strong>常量</strong>。</li>
+            <li><strong>高阶偏导数</strong>: 若混合偏导数 \(f_{xy}\) 和 \(f_{yx}\) 连续，则 \(f_{xy} = f_{yx}\)。</li>
+        </ul>
+        
+        <h4>5.2 全微分</h4>
+        <ul>
+            <li><strong>定义</strong>: 若函数增量可表示为 \(\Delta z = A\Delta x + B\Delta y + o(\rho)\)，则称函数可微。</li>
+            <li><strong>公式</strong>: \(dz = \frac{\partial z}{\partial x}dx + \frac{\partial z}{\partial y}dy\)</li>
+            <li><strong>可微、连续、偏导数存在的关系</strong>:
+                <ul>
+                    <li>可微 \(\Rightarrow\) 连续</li>
+                    <li>可微 \(\Rightarrow\) 偏导数存在</li>
+                    <li><span class="important">【重要】</span>偏导数存在<strong>连续</strong> \(\Rightarrow\) 可微</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>5.3 多元复合函数求导法则（链式法则）</h4>
+        <ul>
+            <li><strong>核心</strong>: 画出变量依赖关系图，按路径求和。</li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>设 \(z = f(xy, x^2)\)，f具有二阶连续偏导数，求 \(\frac{\partial^2 z}{\partial x \partial y}\)。</p>
+            <span class="example-title">解:</span>
+            <p>令 \(u=xy, v=x^2\)。</p>
+            <p>\(\frac{\partial z}{\partial y} = f'_1 \cdot \frac{\partial u}{\partial y} + f'_2 \cdot \frac{\partial v}{\partial y} = f'_1 \cdot x + f'_2 \cdot 0 = xf'_1\)。</p>
+            <p>\(\frac{\partial^2 z}{\partial x \partial y} = \frac{\partial}{\partial x}(xf'_1) = 1 \cdot f'_1 + x \cdot \frac{\partial f'_1}{\partial x}\)</p>
+            <p>\(= f'_1 + x \left( f''_{11} \frac{\partial u}{\partial x} + f''_{12} \frac{\partial v}{\partial x} \right)\)</p>
+            <p>\(= f'_1 + x(f''_{11} \cdot y + f''_{12} \cdot 2x) = f'_1 + xyf''_{11} + 2x^2f''_{12}\)。</p>
+        </div>
+
+        <h4>5.4 隐函数求导</h4>
+        <ul>
+            <li><strong>公式</strong>:
+                <ul>
+                    <li>由 \(F(x,y)=0\) 确定的 \(y=y(x)\)：\(\frac{dy}{dx} = -\frac{F_x}{F_y}\)</li>
+                    <li>由 \(F(x,y,z)=0\) 确定的 \(z=z(x,y)\)：\(\frac{\partial z}{\partial x} = -\frac{F_x}{F_z}\), \(\frac{\partial z}{\partial y} = -\frac{F_y}{F_z}\)</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>设 \(z=z(x,y)\) 由 \(x^2-6xy+10y^2-2yz-z^2+18=0\) 确定，求 \(z(x,y)\) 的驻点。</p>
+            <span class="example-title">解:</span>
+            <p>令 \(F(x,y,z) = x^2-6xy+10y^2-2yz-z^2+18\)。</p>
+            <p>\(\frac{\partial z}{\partial x} = -\frac{F_x}{F_z} = -\frac{2x-6y}{-2y-2z} = \frac{x-3y}{y+z} = 0 \Rightarrow x=3y\)。</p>
+            <p>\(\frac{\partial z}{\partial y} = -\frac{F_y}{F_z} = -\frac{-6x+20y-2z}{-2y-2z} = \frac{-3x+10y-z}{y+z} = 0 \Rightarrow -3x+10y-z=0\)。</p>
+            <p>联立方程组:
+                <ol>
+                    <li>\(x=3y\)</li>
+                    <li>\(-3x+10y-z=0 \Rightarrow -3(3y)+10y-z=0 \Rightarrow y-z=0 \Rightarrow y=z\)</li>
+                </ol>
+            </p>
+            <p>将 \(x=3y, z=y\) 代入原方程: \((3y)^2 - 6(3y)y + 10y^2 - 2y(y) - y^2 + 18 = 0\)</p>
+            <p>\(9y^2 - 18y^2 + 10y^2 - 2y^2 - y^2 + 18 = -2y^2 + 18 = 0 \Rightarrow y^2=9 \Rightarrow y=\pm3\)。</p>
+            <p>当 \(y=3\) 时, \(x=9, z=3\)。驻点为 \((9,3)\)，对应 \(z=3\)。</p>
+            <p>当 \(y=-3\) 时, \(x=-9, z=-3\)。驻点为 \((-9,-3)\)，对应 \(z=-3\)。</p>
+        </div>
+    </section>
+
+    <section>
+        <h3>第六章：微分学的几何应用、方向导数与梯度</h3>
+        <h4>6.1 空间曲线的切线与法平面</h4>
+        <ul>
+            <li>设曲线参数方程为 \(\vec{r}(t) = (x(t), y(t), z(t))\)，在点 \(M_0\) 对应 \(t=t_0\)。</li>
+            <li><strong>切向量</strong>: \(\vec{T} = \vec{r}'(t_0) = (x'(t_0), y'(t_0), z'(t_0))\)</li>
+            <li><strong>切线方程</strong>: \(\frac{x-x_0}{x'(t_0)} = \frac{y-y_0}{y'(t_0)} = \frac{z-z_0}{z'(t_0)}\)</li>
+            <li><strong>法平面方程</strong>: \(x'(t_0)(x-x_0) + y'(t_0)(y-y_0) + z'(t_0)(z-z_0) = 0\)</li>
+        </ul>
+
+        <h4>6.2 曲面的切平面与法线</h4>
+        <ul>
+            <li>设曲面方程为 \(F(x,y,z)=0\)，在点 \(M_0(x_0,y_0,z_0)\)。</li>
+            <li><strong>法向量</strong>: \(\vec{n} = (F_x, F_y, F_z)|_{M_0}\)</li>
+            <li><strong>切平面方程</strong>: \(F_x(x-x_0) + F_y(y-y_0) + F_z(z-z_0) = 0\)</li>
+            <li><strong>法线方程</strong>: \(\frac{x-x_0}{F_x} = \frac{y-y_0}{F_y} = \frac{z-z_0}{F_z}\)</li>
+        </ul>
+
+        <h4>6.3 方向导数与梯度</h4>
+        <ul>
+            <li><strong>方向导数</strong>: 函数 \(f\) 在点P沿方向 \(\vec{l}\) 的变化率。
+                <ul><li>\(\frac{\partial f}{\partial l} = \frac{\partial f}{\partial x}\cos\alpha + \frac{\partial f}{\partial y}\cos\beta + \frac{\partial f}{\partial z}\cos\gamma\)</li></ul>
+            </li>
+            <li><strong>梯度</strong>: \(\text{grad} f = \nabla f = (\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z})\)</li>
+            <li><strong>关系</strong>: \(\frac{\partial f}{\partial l} = \nabla f \cdot \vec{e_l}\) (其中 \(\vec{e_l}\) 是 \(\vec{l}\) 的单位向量)</li>
+            <li><strong>几何意义</strong>: 梯度的方向是函数增长最快的方向，梯度的模是这个最大增长率。</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>第七章：多元函数的极值</h3>
+        <h4>7.1 无条件极值</h4>
+        <ul>
+            <li><strong>必要条件</strong>: 极值点必为驻点（\(f_x=0, f_y=0\)）或偏导数不存在的点。</li>
+            <li><strong>充分条件</strong>: 设 \((x_0,y_0)\) 为驻点，记 \(A=f_{xx}, B=f_{xy}, C=f_{yy}\) 在该点的值。
+                <ul>
+                    <li>\(AC - B^2 > 0\): 有极值。若 \(A>0\) 为极小值；若 \(A<0\) 为极大值。</li>
+                    <li>\(AC - B^2 < 0\): 不是极值点（鞍点）。</li>
+                    <li>\(AC - B^2 = 0\): 方法失效。</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>7.2 条件极值（拉格朗日乘数法）</h4>
+        <ul>
+            <li><strong>问题</strong>: 求函数 \(z=f(x,y)\) 在约束条件 \(\varphi(x,y)=0\) 下的极值。</li>
+            <li><strong>方法</strong>: 构造拉格朗日函数 \(L(x,y,\lambda) = f(x,y) + \lambda\varphi(x,y)\)，联立求解方程组：
+                \[\begin{cases} L_x = f_x + \lambda\varphi_x = 0 \\ L_y = f_y + \lambda\varphi_y = 0 \\ \varphi(x,y) = 0 \end{cases}\]
+            </li>
+        </ul>
+    </section>
+
+    <hr>
+    <h2>第三部分：重积分</h2>
+    
+    <section>
+        <h3>第八章：二重积分</h3>
+        <h4>8.1 二重积分的计算</h4>
+        <ul>
+            <li><strong>直角坐标</strong>: 化为两次定积分。</li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>计算 \(\iint_D (3x+2y) d\sigma\)，D由 \(x+y=2, x=0, y=0\) 围成。</p>
+            <span class="example-title">解:</span>
+            <p>\(\int_0^2 dx \int_0^{2-x} (3x+2y) dy = \int_0^2 [3xy+y^2]_0^{2-x} dx = \int_0^2 (-2x^2+2x+4) dx = \frac{20}{3}\)。</p>
+        </div>
+        <ul>
+            <li><strong>极坐标</strong>: 适用于圆形区域或被积函数含 \(x^2+y^2\)。
+                <ul>
+                    <li><strong>面积微元</strong>: \(d\sigma = dxdy = \rho d\rho d\theta\)</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>计算 \(\iint_D e^{-(x^2+y^2)} d\sigma\)，D是半径为a的圆盘。</p>
+            <span class="example-title">解:</span>
+            <p>\(\int_0^{2\pi} d\theta \int_0^a e^{-\rho^2} \rho d\rho = 2\pi [-\frac{1}{2}e^{-\rho^2}]_0^a = \pi(1-e^{-a^2})\)。</p>
+        </div>
+        <ul>
+            <li><strong>交换积分顺序</strong></li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>交换积分次序 \(I = \int_1^2 dx \int_{2-x}^{\sqrt{2x-x^2}} f(x,y) dy\)</p>
+            <span class="example-title">分析:</span>
+            <p>区域D的上边界是圆 \((x-1)^2+y^2=1\) (\(y \ge 0\))，下边界是直线 \(y=2-x\)。</p>
+            <p><strong>交换后</strong>: 区域变为Y-型， \(0 \le y \le 1\)。左边界 \(x=2-y\)，右边界 \(x=1+\sqrt{1-y^2}\)。</p>
+            <p>\(I = \int_0^1 dy \int_{2-y}^{1+\sqrt{1-y^2}} f(x,y) dx\)。</p>
+        </div>
+    </section>
+
+    <section>
+        <h3>第九章：三重积分</h3>
+        <h4>9.1 三重积分的计算</h4>
+        <ul>
+            <li><strong>直角坐标（先一后二）</strong>: \(\iiint_\Omega f(x,y,z) dV = \iint_{D_{xy}} dxdy \int_{z_1(x,y)}^{z_2(x,y)} f(x,y,z) dz\)</li>
+            <li><strong>切片法（先二后一）</strong>: \(\iiint_\Omega f(x,y,z) dV = \int_c^d dz \iint_{D_z} f(x,y,z) dxdy\)</li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>计算 \(\iiint_\Omega z^2 dV\)，Ω是由椭球面 \(\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1\) 围成的区域。</p>
+            <span class="example-title">解:</span>
+            <p>\(\int_{-c}^c z^2 \left( \iint_{D_z} dxdy \right) dz\)。截面 \(D_z\) 是面积为 \(\pi ab(1-\frac{z^2}{c^2})\) 的椭圆。</p>
+            <p>原式 = \(\int_{-c}^c z^2 \pi ab(1-\frac{z^2}{c^2}) dz = \frac{4}{15}\pi abc^3\)。 <span class="correction">(请注意，原笔记计算的是\(\int z^2\), 不是体积V，结果应为 \(\frac{4}{15} \pi ab c^3\))</span></p>
+        </div>
+        <ul>
+            <li><strong>柱面坐标</strong>: \(x=\rho\cos\theta, y=\rho\sin\theta, z=z\)，\(dV = \rho d\rho d\theta dz\)</li>
+            <li><strong>球面坐标</strong>: \(x=r\sin\varphi\cos\theta, y=r\sin\varphi\sin\theta, z=r\cos\varphi\)，\(dV = r^2\sin\varphi dr d\varphi d\theta\)</li>
+        </ul>
+    </section>
+
+    <hr>
+    <h2>第四部分：曲线积分与曲面积分</h2>
+    
+    <section>
+        <h3>第十章：曲线积分</h3>
+        <h4>10.1 第一类曲线积分（对弧长的积分）</h4>
+        <ul>
+            <li><strong>定义</strong>: \(\int_L f(x,y) ds\)</li>
+            <li><strong>物理意义</strong>: 曲线构件的质量（f为线密度）。</li>
+            <li><strong>计算</strong>: 化为定积分。若L: \(y=\psi(x)\)，\(ds=\sqrt{1+(\psi'(x))^2}dx\)。若L: \(x=\phi(t), y=\psi(t)\)，\(ds=\sqrt{(\phi'(t))^2+(\psi'(t))^2}dt\)。</li>
+        </ul>
+
+        <h4>10.2 第二类曲线积分（对坐标的积分）</h4>
+        <ul>
+            <li><strong>定义</strong>: \(\int_L Pdx+Qdy\)</li>
+            <li><strong>物理意义</strong>: 变力沿曲线所做的功。</li>
+            <li><strong>计算</strong>: 化为定积分，<strong>注意积分方向</strong>。</li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>计算 \(\oint_L xy dx\)，L由上半圆周 \(y=\sqrt{a^2-x^2}\) (从A(a,0)到B(-a,0))和线段BA组成。</p>
+            <span class="example-title">解:</span>
+            <ul>
+                <li>线段BA上: y=0, dy=0, \(\int_{-a}^a x \cdot 0 \cdot dx = 0\)。</li>
+                <li>上半圆周上: \(x=a\cos t, y=a\sin t\), t从0到\(\pi\) (因为从A到B)。\(dx = -a\sin t dt\)。</li>
+                <li>\(\int_0^\pi (a\cos t)(a\sin t)(-a\sin t dt) = -a^3\int_0^\pi \cos t \sin^2 t dt = -a^3[\frac{1}{3}\sin^3 t]_0^\pi = 0\)。</li>
+                <li><span class="correction">【校正】</span>：笔记中的计算结果`-2/3 a³`是正确的，上述计算有误。正确积分是：\(\int_0^\pi (a\cos t)(a\sin t)(-a\sin t dt) = -a^3 \int_0^\pi \sin^2 t d(\sin t) = -a^3 [\frac{\sin^3 t}{3}]_0^\pi = 0\)。看来笔记的例题可能与题目不符。若题目为\(\oint_L y^2 dx\)，则结果为 \(-\frac{4}{3} a^3\)。若题目为\(\oint_L x dy\)，则为\(\frac{\pi a^2}{2}\)。 我们以笔记中的另一题为例：</li>
+            </ul>
+        </div>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>计算 \(\int_L (x^2-y^2)dx\)，L是曲线 \(y=x^3\) 从(0,0)到(1,1)。</p>
+            <span class="example-title">解:</span>
+            <p>\(y=x^3 \Rightarrow dy=3x^2 dx\)。</p>
+            <p>\(\int_0^1 (x^2 - (x^3)^2) dx = \int_0^1 (x^2 - x^6) dx = [\frac{x^3}{3} - \frac{x^7}{7}]_0^1 = \frac{1}{3}-\frac{1}{7} = \frac{4}{21}\)。</p>
+        </div>
+
+        <h4>10.3 格林公式</h4>
+        <ul>
+            <li><strong>公式</strong>: \(\oint_L Pdx+Qdy = \iint_D (\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}) dxdy\) (L为D的正向边界)。</li>
+            <li><strong>应用 (求面积)</strong>: \(A = \frac{1}{2}\oint_L xdy-ydx\)</li>
+            <li><strong>平面上积分与路径无关的条件</strong>: 在单连通区域D内，\(\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}\)。</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>第十一章：曲面积分</h3>
+        <h4>11.1 第一类曲面积分（对面积的积分）</h4>
+        <ul>
+            <li><strong>定义</strong>: \(\iint_\Sigma f(x,y,z) dS\)</li>
+            <li><strong>计算</strong>: 投影法。若Σ: \(z=z(x,y)\)，投影到Dxy，则 \(dS = \sqrt{1+z_x^2+z_y^2}dxdy\)。</li>
+        </ul>
+
+        <h4>11.2 第二类曲面积分（对坐标的积分）</h4>
+        <ul>
+            <li><strong>定义</strong>: \(\iint_\Sigma P dydz + Q dzdx + R dxdy\)</li>
+            <li><strong>计算</strong>: 投影法，<strong>注意曲面法向量方向（取侧）</strong>。
+                <ul>
+                    <li>\(\iint_\Sigma R dxdy = \pm \iint_{D_{xy}} R(x,y,z(x,y)) dxdy\) (+取上侧，-取下侧)。</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>11.3 高斯公式</h4>
+        <ul>
+            <li><strong>公式</strong>: \(\oiint_\Sigma P dydz + Q dzdx + R dxdy = \iiint_\Omega (\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}) dV\) (Σ为Ω的外侧)。</li>
+        </ul>
+        
+        <h4>11.4 斯托克斯公式</h4>
+        <ul>
+            <li><strong>公式</strong>: \(\oint_\Gamma Pdx+Qdy+Rdz = \iint_\Sigma (\frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z})dydz + (\frac{\partial P}{\partial z}-\frac{\partial R}{\partial x})dzdx + (\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y})dxdy\)。</li>
+        </ul>
+    </section>
+    
+    <hr>
+    <h2>第五部分：无穷级数</h2>
+    
+    <section>
+        <h3>第十二章：常数项级数</h3>
+        <h4>12.1 基本概念与性质</h4>
+        <ul>
+            <li><strong>收敛</strong>: 部分和序列 \(S_n\) 的极限存在。</li>
+            <li><strong>收敛的必要条件</strong>: \(\lim_{n \to \infty} u_n = 0\)。若极限不为0，级数必发散。</li>
+        </ul>
+
+        <h4>12.2 正项级数审敛法</h4>
+        <ul>
+            <li><strong>比较审敛法</strong>:
+                <ul>
+                    <li>\(u_n \le v_n\)，若 \(\sum v_n\) 收敛，则 \(\sum u_n\) 收敛 (大收小收)。</li>
+                    <li>\(u_n \ge v_n\)，若 \(\sum v_n\) 发散，则 \(\sum u_n\) 发散 (小发大发)。</li>
+                </ul>
+            </li>
+            <li><strong>比较审敛法的极限形式</strong>:
+                <ul>
+                    <li>\(\lim_{n \to \infty} \frac{u_n}{v_n} = L (0 < L < \infty)\)，则二者同敛散。</li>
+                </ul>
+            </li>
+            <li><strong>比值审敛法</strong>: \(\lim_{n \to \infty} \frac{u_{n+1}}{u_n} = \rho\)
+                <ul>
+                    <li>\(\rho < 1\) 收敛； \(\rho > 1\) 发散； \(\rho = 1\) 失效。</li>
+                </ul>
+            </li>
+            <li><strong>根值审敛法</strong>: \(\lim_{n \to \infty} \sqrt[n]{u_n} = \rho\)
+                <ul>
+                    <li>\(\rho < 1\) 收敛； \(\rho > 1\) 发散； \(\rho = 1\) 失效。</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>12.3 任意项级数</h4>
+        <ul>
+            <li><strong>交错级数与莱布尼茨定理</strong>: 若交错级数 \(\sum(-1)^{n-1}u_n\) 满足 (1) \(u_n\) 单调递减；(2) \(\lim_{n \to \infty} u_n=0\)，则级数收敛。</li>
+            <li><strong>绝对收敛与条件收敛</strong>:
+                <ul>
+                    <li>若 \(\sum|u_n|\) 收敛，称 \(\sum u_n\) <strong>绝对收敛</strong>。绝对收敛的级数一定收敛。</li>
+                    <li>若 \(\sum u_n\) 收敛，而 \(\sum|u_n|\) 发散，称 \(\sum u_n\) <strong>条件收敛</strong>。</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>第十三章：幂级数</h3>
+        <h4>13.1 幂级数的收敛域</h4>
+        <ul>
+            <li><strong>收敛半径R</strong>: 由 \(\rho = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right|\) 或 \(\rho = \lim_{n \to \infty} \sqrt[n]{|a_n|}\) 求得，\(R=1/\rho\)。</li>
+            <li><strong>收敛区间</strong>: \((-R, R)\)。收敛域还需讨论端点 \(x=\pm R\) 的敛散性。</li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>求幂级数 \(\sum_{n=1}^\infty \frac{(x-1)^n}{n \cdot 2^n}\) 的收敛域。</p>
+            <span class="example-title">解:</span>
+            <p>令 \(t=x-1\)，原级数为 \(\sum \frac{t^n}{n \cdot 2^n}\)。</p>
+            <p>\(\rho = \lim_{n \to \infty} \left| \frac{1/( (n+1)2^{n+1} )}{1/(n \cdot 2^n)} \right| = \lim_{n \to \infty} \frac{n \cdot 2^n}{(n+1)2^{n+1}} = \frac{1}{2}\)。</p>
+            <p>\(R_t = 1/\rho = 2\)。收敛区间为 \(|t|<2 \Rightarrow |x-1|<2 \Rightarrow -1 < x < 3\)。</p>
+            <p><strong>端点分析</strong>:
+                <ul>
+                    <li>\(x=3\) (t=2): \(\sum \frac{2^n}{n \cdot 2^n} = \sum \frac{1}{n}\) (调和级数)，发散。</li>
+                    <li>\(x=-1\) (t=-2): \(\sum \frac{(-2)^n}{n \cdot 2^n} = \sum \frac{(-1)^n}{n}\) (交错级数)，收敛。</li>
+                </ul>
+            </p>
+            <p><strong>收敛域</strong>: \([-1, 3)\)。</p>
+        </div>
+        
+        <h4>13.2 函数展开成幂级数</h4>
+        <ul>
+            <li><strong>泰勒级数</strong>: \(f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n\)</li>
+            <li><strong>麦克劳林级数</strong> (\(x_0=0\))
+                <ul>
+                    <li>\(e^x = \sum_{n=0}^\infty \frac{x^n}{n!}\)</li>
+                    <li>\(\sin x = \sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)!}x^{2n+1}\)</li>
+                    <li>\(\cos x = \sum_{n=0}^\infty \frac{(-1)^n}{(2n)!}x^{2n}\)</li>
+                    <li>\(\ln(1+x) = \sum_{n=1}^\infty \frac{(-1)^{n-1}}{n}x^n\)</li>
+                    <li>\(\frac{1}{1-x} = \sum_{n=0}^\infty x^n\)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>13.3 幂级数的和函数</h4>
+        <ul>
+            <li><strong>方法</strong>: 利用逐项求导或逐项积分，将其转化为已知的几何级数或麦克劳林级数。</li>
+        </ul>
+        <div class="example">
+            <span class="example-title">例题:</span>
+            <p>求级数 \(\sum_{n=0}^\infty \frac{x^n}{n+1}\) 的和函数。</p>
+            <span class="example-title">解:</span>
+            <p>设 \(S(x) = \sum_{n=0}^\infty \frac{x^n}{n+1}\)。收敛域为 \([-1, 1)\)。</p>
+            <p>当 \(x \neq 0\) 时，\(xS(x) = \sum_{n=0}^\infty \frac{x^{n+1}}{n+1}\)。</p>
+            <p>两边求导：\((xS(x))' = \sum_{n=0}^\infty x^n = \frac{1}{1-x}\)。</p>
+            <p>两边积分：\(xS(x) = \int_0^x \frac{1}{1-t} dt = -\ln(1-x)\)。</p>
+            <p>\(S(x) = -\frac{\ln(1-x)}{x}\)。</p>
+            <p>当 \(x=0\) 时，\(S(0) = a_0 = 1\)。</p>
+            <p>和函数为 \(S(x) = \begin{cases} -\frac{\ln(1-x)}{x}, & x \in [-1, 0) \cup (0, 1) \\ 1, & x=0 \end{cases}\)。</p>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
