@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多元函数微积分学习笔记</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #e4e4e7;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(24, 24, 37, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00d4ff, #ff00ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a1a1aa;
+            font-size: 1.1rem;
+        }
+
+        .nav {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            color: #e4e4e7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            background: rgba(24, 24, 37, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #00d4ff;
+            border-left: 4px solid #00d4ff;
+            padding-left: 1rem;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+            color: #ff6b6b;
+            position: relative;
+        }
+
+        .section h3::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #ff6b6b;
+            border-radius: 50%;
+        }
+
+        .section h4 {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem 0;
+            color: #ffd93d;
+        }
+
+        ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+            position: relative;
+        }
+
+        li::marker {
+            color: #00d4ff;
+        }
+
+        .formula-box {
+            background: rgba(15, 15, 35, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 3px solid #ff6b6b;
+            padding: 1rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1rem 0;
+        }
+
+        .note {
+            background: rgba(255, 217, 61, 0.1);
+            border-left: 3px solid #ffd93d;
+            padding: 1rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1rem 0;
+        }
+
+        .theorem {
+            background: rgba(139, 69, 255, 0.1);
+            border: 1px solid rgba(139, 69, 255, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .theorem-title {
+            color: #8b45ff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: rgba(24, 24, 37, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(45deg, #00d4ff, #ff00ff);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>多元函数微积分学习笔记</h1>
+            <p class="subtitle">Multivariable Calculus Study Notes</p>
+            <nav class="nav">
+                <a href="#multivariable" class="nav-item">多元函数微积分</a>
+                <a href="#integrals" class="nav-item">重积分</a>
+                <a href="#curves-surfaces" class="nav-item">曲线曲面积分</a>
+                <a href="#series" class="nav-item">无穷级数</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="multivariable" class="section">
+            <h2>一、多元函数微积分 (Multivariable Calculus)</h2>
+            
+            <h3>1. 极限与连续</h3>
+            <div class="theorem">
+                <div class="theorem-title">重要极限</div>
+                <div class="formula-box">
+                    $$\lim_{a \to 0} (1+a)^{\frac{1}{a}} = e$$
+                    $$\lim_{x \to 0} \frac{\sin x}{x} = 1$$
+                </div>
+            </div>
+
+            <h4>等价无穷小 (当 $x \to 0$ 时)</h4>
+            <ul>
+                <li>$x \sim \sin x \sim \tan x \sim \arcsin x \sim \arctan x$</li>
+                <li>$\ln(1+x) \sim x$</li>
+                <li>$e^x - 1 \sim x$</li>
+                <li>$1 - \cos x \sim \frac{1}{2}x^2$</li>
+                <li>$(1+x)^a - 1 \sim ax$</li>
+                <li>$\sqrt{1+x} - 1 \sim \frac{1}{2}x$</li>
+            </ul>
+
+            <div class="note">
+                <strong>有理化：</strong> 利用 $(a+b)(a-b) = a^2-b^2$ (分子/母上有根号时使用)
+            </div>
+
+            <div class="highlight">
+                <strong>无穷小 × 常量 = 0</strong>
+            </div>
+
+            <h4>二元函数连续</h4>
+            <ol>
+                <li>在 $(x_0, y_0)$ 处有定义</li>
+                <li>极限存在 (若不存在，则找到一条路径使得极限不存在或与其他路径不相等)</li>
+            </ol>
+
+            <h3>2. 偏导数</h3>
+            <div class="formula-box">
+                $$\frac{\partial z}{\partial x} = f_x = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x, y_0) - f(x_0, y_0)}{\Delta x}$$
+                $$\frac{\partial z}{\partial y} = f_y = \lim_{\Delta y \to 0} \frac{f(x_0, y_0+\Delta y) - f(x_0, y_0)}{\Delta y}$$
+            </div>
+            
+            <div class="note">
+                求偏导时，将其他变量视为常数
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">定理</div>
+                若二阶混合偏导 $f_{xy}$, $f_{yx}$ 在区域D内连续，则 $f_{xy} = f_{yx}$
+            </div>
+
+            <h4>定义法求偏导</h4>
+            <div class="highlight">
+                分段函数在分界点：必须用定义求
+            </div>
+
+            <h3>3. 全微分</h3>
+            <div class="formula-box">
+                $$dz = \frac{\partial z}{\partial x}dx + \frac{\partial z}{\partial y}dy$$
+                $$du = \frac{\partial u}{\partial x}dx + \frac{\partial u}{\partial y}dy + \frac{\partial u}{\partial z}dz$$
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">可微、连续、偏导存在的关系</div>
+                偏导连续 ⇒ 可微 ⇒ 连续 ⇒ 偏导存在
+            </div>
+
+            <h3>4. 复合函数求偏导 (链式法则)</h3>
+            <div class="note">
+                <strong>方法：</strong> 画出变量间的依赖关系图
+            </div>
+            
+            例：$z = f(u, v)$, $u = u(x, y)$, $v = v(x, y)$
+            <div class="formula-box">
+                $$\frac{\partial z}{\partial x} = \frac{\partial z}{\partial u}\frac{\partial u}{\partial x} + \frac{\partial z}{\partial v}\frac{\partial v}{\partial x}$$
+            </div>
+
+            <h3>5. 隐函数求偏导</h3>
+            <div class="card">
+                <h4>公式法</h4>
+                <ol>
+                    <li>将方程化为 $F(x, y, z) = 0$ (全部移到一边)</li>
+                    <li>求 $F_x$, $F_y$, $F_z$</li>
+                    <li>$\frac{\partial z}{\partial x} = -\frac{F_x}{F_z}$，$\frac{\partial z}{\partial y} = -\frac{F_y}{F_z}$</li>
+                </ol>
+            </div>
+
+            <h3>6. 方向导数与梯度</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>梯度</h4>
+                    <div class="formula-box">
+                        $$\text{grad } f(x_0, y_0) = (f_x, f_y)$$
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>方向导数</h4>
+                    <ol>
+                        <li>求梯度 $\text{grad } f = (f_x, f_y)$</li>
+                        <li>求方向的单位向量 $\vec{e}$</li>
+                        <li>方向导数 = $\text{grad } f \cdot \vec{e}$</li>
+                    </ol>
+                </div>
+            </div>
+
+            <h3>7. 多元函数极值</h3>
+            <h4>无条件极值</h4>
+            <ol>
+                <li>求驻点：解方程组 $f_x = 0$, $f_y = 0$，得 $(x_0, y_0)$</li>
+                <li>求二阶偏导：$A = f_{xx}$, $B = f_{xy}$, $C = f_{yy}$</li>
+                <li>判定：
+                    <ul>
+                        <li>$AC - B^2 > 0$：有极值 (若 $A>0$ 为极小值，$A<0$ 为极大值)</li>
+                        <li>$AC - B^2 < 0$：无极值 (鞍点)</li>
+                        <li>$AC - B^2 = 0$：不确定</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="highlight">
+                <strong>最值：</strong> 存在于 ①驻点 ②边界点
+            </div>
+
+            <h4>条件极值 (拉格朗日乘数法)</h4>
+            <div class="note">
+                求 $f(x, y)$ 在约束 $g(x, y) = 0$下的极值
+            </div>
+            <ol>
+                <li>构造拉格朗日函数 $L(x, y, \lambda) = f(x, y) + \lambda g(x, y)$</li>
+                <li>解方程组：$L_x = 0$, $L_y = 0$, $L_\lambda = 0$ (即约束条件)</li>
+                <li>解出的点即为可能的极值点，代回目标函数 $f(x,y)$ 比较大小</li>
+            </ol>
+
+            <h3>8. 空间几何</h3>
+            <div class="grid">
+                <div class="card">
+                    <h4>空间平面</h4>
+                    法向量：$\vec{n} = (A, B, C)$
+                    <div class="formula-box">
+                        点法式：$$A(x-x_0) + B(y-y_0) + C(z-z_0) = 0$$
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>空间直线</h4>
+                    方向向量：$\vec{\tau} = (a, b, c)$
+                    <div class="formula-box">
+                        对称式：$$\frac{x-x_0}{a} = \frac{y-y_0}{b} = \frac{z-z_0}{c}$$
+                    </div>
+                </div>
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">曲面的切平面与法线</div>
+                对于曲面 $F(x, y, z) = 0$：
+                <ul>
+                    <li><strong>法向量：</strong> $\vec{n} = (F_x, F_y, F_z)$</li>
+                    <li><strong>切平面：</strong> 以 $\vec{n}$ 为法向量的平面</li>
+                    <li><strong>法线：</strong> 以 $\vec{n}$ 为方向向量的直线</li>
+                </ul>
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">空间曲线的切线与法平面</div>
+                对于曲线 $x=x(t), y=y(t), z=z(t)$：
+                <ul>
+                    <li><strong>切向量：</strong> $\vec{\tau} = (x'(t), y'(t), z'(t))$</li>
+                    <li><strong>切线：</strong> 以 $\vec{\tau}$ 为方向向量的直线</li>
+                    <li><strong>法平面：</strong> 以 $\vec{\tau}$ 为法向量的平面</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="integrals" class="section">
+            <h2>二、重积分 (Multiple Integrals)</h2>
+            
+            <h3>1. 二重积分</h3>
+            
+            <h4>直角坐标</h4>
+            <div class="grid">
+                <div class="card">
+                    <h4>先y后x (x-型)</h4>
+                    <div class="formula-box">
+                        $$\iint f(x,y) d\sigma = \int_a^b dx \int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) dy$$
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>先x后y (y-型)</h4>
+                    <div class="formula-box">
+                        $$\iint f(x,y) d\sigma = \int_c^d dy \int_{\psi_1(y)}^{\psi_2(y)} f(x,y) dx$$
+                    </div>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>积分次序交换：</strong> 画出积分区域，根据新次序重定积分限
+            </div>
+
+            <h4>极坐标</h4>
+            <div class="formula-box">
+                $$x = \rho\cos\theta, \quad y = \rho\sin\theta, \quad dxdy = \rho d\rho d\theta$$
+                $$\iint f(x,y) dxdy = \int_\alpha^\beta d\theta \int_{\rho_1(\theta)}^{\rho_2(\theta)} f(\rho\cos\theta, \rho\sin\theta) \rho d\rho$$
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">对称性</div>
+                <ul>
+                    <li><strong>区域对称：</strong> 若积分域D关于x轴对称，被积函数$f(x,y)$关于$y$是奇函数，则积分为0；若为偶函数，则积分为2倍的上半(或下半)区域的积分</li>
+                    <li><strong>函数对称：</strong> 若积分域D关于$y=x$对称，$\iint_D f(x,y) d\sigma = \iint_D f(y,x) d\sigma$</li>
+                </ul>
+            </div>
+
+            <h3>2. 三重积分</h3>
+            
+            <h4>直角坐标 (先z后xy)</h4>
+            <div class="formula-box">
+                $$\iiint f(x,y,z) dV = \iint_{D_{xy}} dxdy \int_{z_1(x,y)}^{z_2(x,y)} f(x,y,z) dz$$
+            </div>
+
+            <h4>柱面坐标</h4>
+            <div class="formula-box">
+                $$x = \rho\cos\theta, \quad y = \rho\sin\theta, \quad z = z, \quad dV = \rho d\rho d\theta dz$$
+            </div>
+
+            <h4>球面坐标</h4>
+            <div class="formula-box">
+                $$x = r\sin\varphi\cos\theta, \quad y = r\sin\varphi\sin\theta, \quad z = r\cos\varphi$$
+                $$dV = r^2\sin\varphi dr d\varphi d\theta$$
+            </div>
+
+            <div class="highlight">
+                <strong>对称性 (奇偶性)：</strong> "你(区域)对称，我(函数)奇，你亡(积分为0)"
+            </div>
+
+            <div class="note">
+                <strong>几何意义：</strong> 若被积函数为1，则积分结果为该区域的体积 $V$
+            </div>
+        </section>
+
+        <section id="curves-surfaces" class="section">
+            <h2>三、曲线与曲面积分 (Line and Surface Integrals)</h2>
+            
+            <h3>1. 曲线积分</h3>
+            
+            <h4>第一类曲线积分 (对弧长)</h4>
+            <div class="formula-box">
+                $$\int_L f(x, y) ds$$
+            </div>
+            <div class="note">
+                <strong>物理意义：</strong> 曲线质量
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">计算方法：化为定积分</div>
+                <ul>
+                    <li>若 $y = y(x)$：$ds = \sqrt{1+y'^2} dx$</li>
+                    <li>若 $x = x(y)$：$ds = \sqrt{1+x'^2} dy$</li>
+                    <li>若参数方程 $x=x(t), y=y(t)$：$ds = \sqrt{x'(t)^2 + y'(t)^2} dt$</li>
+                </ul>
+                <div class="note">
+                    几何意义：若 $f(x,y)=1$，结果为曲线L的弧长
+                </div>
+            </div>
+
+            <h4>第二类曲线积分 (对坐标)</h4>
+            <div class="formula-box">
+                $$\int_L Pdx + Qdy$$
+            </div>
+            <div class="note">
+                <strong>物理意义：</strong> 力沿路径做功
+            </div>
+
+            <div class="highlight">
+                <strong>计算：</strong> 变量统一，化为定积分<br>
+                将所有变量用同一个参数 (如$x$, $y$或$t$) 表示，并注意积分路径的方向
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">格林公式</div>
+                <div class="formula-box">
+                    $$\oint_L Pdx + Qdy = \iint_D \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) dxdy$$
+                </div>
+                <ul>
+                    <li><strong>条件：</strong> L为封闭曲线，P, Q在D内有一阶连续偏导</li>
+                    <li><strong>方向：</strong> 逆时针为正 (人沿L走，区域D在左手边)</li>
+                </ul>
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">积分与路径无关</div>
+                <strong>等价条件：</strong> $\frac{\partial Q}{\partial x} = \frac{\partial P}{\partial y}$
+                <div class="note">
+                    若与路径无关，可选取最简单的路径 (如平行于坐标轴的折线) 进行计算
+                </div>
+            </div>
+
+            <h3>2. 曲面积分</h3>
+            
+            <h4>第一类曲面积分 (对面积)</h4>
+            <div class="formula-box">
+                $$\iint_\Sigma f(x, y, z) dS$$
+            </div>
+            <div class="note">
+                <strong>物理意义：</strong> 曲面质量
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">计算：化为二重积分</div>
+                若 $z = z(x,y)$：
+                <div class="formula-box">
+                    $$dS = \sqrt{1 + z_x'^2 + z_y'^2} dxdy$$
+                    $$\iint_\Sigma f(x,y,z) dS = \iint_{D_{xy}} f(x,y,z(x,y)) \sqrt{1+z_x'^2+z_y'^2} dxdy$$
+                </div>
+            </div>
+
+            <div class="highlight">
+                <strong>对称性：</strong> 偶倍奇零 (若曲面关于某坐标平面对称)
+            </div>
+
+            <h4>第二类曲面积分 (对坐标)</h4>
+            <div class="formula-box">
+                $$\iint_\Sigma P dydz + Q dzdx + R dxdy$$
+            </div>
+            <div class="note">
+                <strong>物理意义：</strong> 流量
+            </div>
+
+            <div class="highlight">
+                <strong>计算：</strong> "投影法"，分三项计算，注意正负号
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">高斯公式</div>
+                <div class="formula-box">
+                    $$\oiint_\Sigma P dydz + Q dzdx + R dxdy = \iiint_\Omega \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\right) dV$$
+                </div>
+                <ul>
+                    <li><strong>条件：</strong> Σ为封闭曲面，P,Q,R在Ω内有一阶连续偏导</li>
+                    <li><strong>方向：</strong> Σ取外侧为正</li>
+                </ul>
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">斯托克斯公式</div>
+                <div class="formula-box">
+                    $$\oint_\Gamma Pdx + Qdy + Rdz = \iint_\Sigma \left(\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z}\right)dydz + \left(\frac{\partial P}{\partial z} - \frac{\partial R}{\partial x}\right)dzdx + \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dxdy$$
+                </div>
+                <div class="note">
+                    <strong>方向：</strong> Γ的方向与Σ的法向量方向符合右手定则
+                </div>
+            </div>
+        </section>
+
+        <section id="series" class="section">
+            <h2>四、无穷级数 (Infinite Series)</h2>
+            
+            <h3>1. 常数项级数审敛法</h3>
+            
+            <div class="theorem">
+                <div class="theorem-title">收敛的必要条件</div>
+                若 $\sum u_n$ 收敛，则 $\lim_{n \to \infty} u_n = 0$
+                <div class="note">
+                    反之，若极限不为0或不存在，则级数发散
+                </div>
+            </div>
+
+            <h4>常用级数</h4>
+            <div class="grid">
+                <div class="card">
+                    <h4>p-级数</h4>
+                    <div class="formula-box">
+                        $$\sum \frac{1}{n^p}$$
+                    </div>
+                    当 $p>1$ 收敛，$p≤1$ 发散
+                </div>
+                <div class="card">
+                    <h4>几何级数</h4>
+                    <div class="formula-box">
+                        $$\sum ar^{n-1}$$
+                    </div>
+                    当 $|r|<1$ 收敛，和为 $\frac{a}{1-r}$；<br>
+                    当 $|r|≥1$ 发散
+                </div>
+            </div>
+
+            <h4>正项级数判别法</h4>
+            <div class="theorem">
+                <div class="theorem-title">比较判别法</div>
+                $\lim_{n \to \infty} \frac{u_n}{v_n} = L$ $(0<L<\infty)$，则 $\sum u_n$ 和 $\sum v_n$ 同敛散
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">比值判别法</div>
+                $\lim_{n \to \infty} \frac{u_{n+1}}{u_n} = \rho$：
+                <ul>
+                    <li>$\rho<1$ 收敛</li>
+                    <li>$\rho>1$ 发散</li>
+                    <li>$\rho=1$ 不确定</li>
+                </ul>
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">根值判别法</div>
+                $\lim_{n \to \infty} \sqrt[n]{u_n} = \rho$：
+                <ul>
+                    <li>$\rho<1$ 收敛</li>
+                    <li>$\rho>1$ 发散</li>
+                    <li>$\rho=1$ 不确定</li>
+                </ul>
+            </div>
+
+            <div class="note">
+                <strong>交错级数：</strong> 使用莱布尼茨判别法
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">绝对收敛与条件收敛</div>
+                <ul>
+                    <li>若 $\sum|u_n|$ 收敛，则 $\sum u_n$ 绝对收敛 (绝对收敛一定收敛)</li>
+                    <li>若 $\sum u_n$ 收敛，但 $\sum|u_n|$ 发散，则 $\sum u_n$ 条件收敛</li>
+                </ul>
+            </div>
+
+            <h3>2. 幂级数</h3>
+            <div class="formula-box">
+                形式：$$\sum a_n x^n$$
+            </div>
+
+            <div class="theorem">
+                <div class="theorem-title">收敛半径 R</div>
+                <div class="formula-box">
+                    $$R = \frac{1}{\rho}$$
+                </div>
+                其中 $\rho = \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right|$ 或 $\rho = \lim_{n \to \infty} \sqrt[n]{|a_n|}$
+            </div>
+
+            <h4>收敛域</h4>
+            <ol>
+                <li>求出收敛半径 R</li>
+                <li>开区间 $(-R, R)$ 内绝对收敛</li>
+                <li>在端点 $x = R$ 和 $x = -R$ 处单独判断敛散性</li>
+            </ol>
+
+            <div class="note">
+                <strong>和函数 S(x)：</strong> 在收敛域内，幂级数可以逐项求导和逐项积分
+            </div>
+
+            <h3>3. 函数展开成幂级数</h3>
+            <h4>方法</h4>
+            <ol>
+                <li>利用已知的麦克劳林公式</li>
+                <li>对已知展开式进行求导、积分、代换等运算</li>
+                <li>利用部分分式分解，将复杂分式拆成简单分式再展开</li>
+            </ol>
+
+            <h4>常用麦克劳林公式</h4>
+            <div class="grid">
+                <div class="card">
+                    <div class="formula-box">
+                        $$e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}, \quad x \in (-\infty, +\infty)$$
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="formula-box">
+                        $$\sin x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}, \quad x \in (-\infty, +\infty)$$
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="formula-box">
+                        $$\cos x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!}, \quad x \in (-\infty, +\infty)$$
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="formula-box">
+                        $$\frac{1}{1-x} = \sum_{n=0}^{\infty} x^n, \quad x \in (-1, 1)$$
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="formula-box">
+                        $$\ln(1+x) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1} x^n}{n}, \quad x \in (-1, 1]$$
+                    </div>
+                </div>
+            </div>
+
+            <h3>4. 傅里叶级数</h3>
+            <div class="theorem">
+                <div class="theorem-title">狄利克雷收敛定理</div>
+                在间断点 $x$ 处，级数收敛于：
+                <div class="formula-box">
+                    $$S(x) = \frac{f(x^-) + f(x^+)}{2}$$
+                </div>
+                (左右极限的平均值)
+            </div>
+        </section>
+    </div>
+
+    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollTopButton = document.querySelector('.scroll-top');
+            if (window.pageYOffset > 300) {
+                scrollTopButton.classList.add('visible');
+            } else {
+                scrollTopButton.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Add intersection observer for section animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.section').forEach((section) => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
