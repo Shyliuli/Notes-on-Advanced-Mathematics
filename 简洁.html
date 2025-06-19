@@ -29,64 +29,129 @@
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: rgba(24, 24, 37, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2rem 0;
-            margin-bottom: 2rem;
-            border-radius: 0 0 20px 20px;
-            position: sticky;
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            background: rgba(24, 24, 37, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            z-index: 1000;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        h1 {
-            font-size: 2.5rem;
+        .mobile-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #00d4ff, #ff00ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .burger-btn {
+            background: none;
+            border: none;
+            color: #e4e4e7;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .burger-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(24, 24, 37, 0.95);
+            backdrop-filter: blur(15px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            padding: 2rem 0;
+        }
+
+        .sidebar-header {
+            padding: 0 2rem 2rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar h1 {
+            font-size: 1.8rem;
             font-weight: 700;
             background: linear-gradient(45deg, #00d4ff, #ff00ff);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-align: center;
             margin-bottom: 0.5rem;
         }
 
-        .subtitle {
-            text-align: center;
+        .sidebar .subtitle {
             color: #a1a1aa;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
 
         .nav {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            padding: 2rem 0;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00d4ff;
+            padding: 0 2rem;
+            margin-bottom: 0.5rem;
         }
 
         .nav-item {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 15px;
+            display: block;
+            padding: 0.75rem 2rem;
             color: #e4e4e7;
             text-decoration: none;
             transition: all 0.3s ease;
+            border-left: 3px solid transparent;
         }
 
-        .nav-item:hover {
+        .nav-item:hover,
+        .nav-item.active {
             background: rgba(0, 212, 255, 0.1);
-            border-color: #00d4ff;
-            transform: translateY(-2px);
+            border-left-color: #00d4ff;
+            color: #00d4ff;
+        }
+
+        .nav-sub-item {
+            padding-left: 3rem;
+            font-size: 0.9rem;
+            color: #a1a1aa;
+        }
+
+        .nav-sub-item:hover {
+            color: #e4e4e7;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 300px;
+            padding: 2rem;
+            min-height: 100vh;
         }
 
         .section {
@@ -230,45 +295,161 @@
             opacity: 1;
         }
 
+        /* Mobile Styles */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
+            .mobile-header {
+                display: flex;
             }
-            
-            h1 {
-                font-size: 2rem;
+
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
             }
-            
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+                padding-top: 5rem; /* Account for mobile header */
+            }
+
             .section {
                 padding: 1.5rem;
             }
-            
-            .nav {
-                flex-direction: column;
-                align-items: center;
+
+            .section h2 {
+                font-size: 1.5rem;
             }
+
+            .section h3 {
+                font-size: 1.3rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .formula-box {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .scroll-top {
+                bottom: 5rem;
+                right: 1rem;
+            }
+        }
+
+        /* Small mobile screens */
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 100vw;
+            }
+
+            .main-content {
+                padding: 0.5rem;
+                padding-top: 4.5rem;
+            }
+
+            .section {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .nav-item {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-sub-item {
+                padding-left: 2.5rem;
+            }
+
+            .sidebar-header {
+                padding: 0 1.5rem 1.5rem 1.5rem;
+            }
+        }
+
+        /* Sidebar overlay for mobile */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-overlay.show {
+                display: block;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation for MathJax */
+        .mjx-loading {
+            color: #00d4ff;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>多元函数微积分学习笔记</h1>
-            <p class="subtitle">Multivariable Calculus Study Notes</p>
-            <nav class="nav">
-                <a href="#multivariable" class="nav-item">多元函数微积分</a>
-                <a href="#integrals" class="nav-item">重积分</a>
-                <a href="#curves-surfaces" class="nav-item">曲线曲面积分</a>
-                <a href="#series" class="nav-item">无穷级数</a>
-            </nav>
-        </div>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="mobile-title">微积分笔记</div>
+        <button class="burger-btn" onclick="toggleSidebar()">☰</button>
     </header>
 
-    <div class="container">
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>多元函数微积分学习笔记</h1>
+            <p class="subtitle">Multivariable Calculus Study Notes</p>
+        </div>
+        
+        <div class="nav">
+            <div class="nav-section">
+                <div class="nav-section-title">目录导航</div>
+                <a href="#multivariable" class="nav-item" onclick="closeSidebar()">多元函数微积分</a>
+                <a href="#limits" class="nav-item nav-sub-item" onclick="closeSidebar()">极限与连续</a>
+                <a href="#partial" class="nav-item nav-sub-item" onclick="closeSidebar()">偏导数</a>
+                <a href="#differential" class="nav-item nav-sub-item" onclick="closeSidebar()">全微分</a>
+                <a href="#extremum" class="nav-item nav-sub-item" onclick="closeSidebar()">多元函数极值</a>
+                
+                <a href="#integrals" class="nav-item" onclick="closeSidebar()">重积分</a>
+                <a href="#double-integral" class="nav-item nav-sub-item" onclick="closeSidebar()">二重积分</a>
+                <a href="#triple-integral" class="nav-item nav-sub-item" onclick="closeSidebar()">三重积分</a>
+                
+                <a href="#curves-surfaces" class="nav-item" onclick="closeSidebar()">曲线曲面积分</a>
+                <a href="#line-integral" class="nav-item nav-sub-item" onclick="closeSidebar()">曲线积分</a>
+                <a href="#surface-integral" class="nav-item nav-sub-item" onclick="closeSidebar()">曲面积分</a>
+                
+                <a href="#series" class="nav-item" onclick="closeSidebar()">无穷级数</a>
+                <a href="#convergence" class="nav-item nav-sub-item" onclick="closeSidebar()">级数审敛法</a>
+                <a href="#power-series" class="nav-item nav-sub-item" onclick="closeSidebar()">幂级数</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
         <section id="multivariable" class="section">
             <h2>一、多元函数微积分 (Multivariable Calculus)</h2>
             
-            <h3>1. 极限与连续</h3>
+            <h3 id="limits">1. 极限与连续</h3>
             <div class="theorem">
                 <div class="theorem-title">重要极限</div>
                 <div class="formula-box">
@@ -301,7 +482,7 @@
                 <li>极限存在 (若不存在，则找到一条路径使得极限不存在或与其他路径不相等)</li>
             </ol>
 
-            <h3>2. 偏导数</h3>
+            <h3 id="partial">2. 偏导数</h3>
             <div class="formula-box">
                 $$\frac{\partial z}{\partial x} = f_x = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x, y_0) - f(x_0, y_0)}{\Delta x}$$
                 $$\frac{\partial z}{\partial y} = f_y = \lim_{\Delta y \to 0} \frac{f(x_0, y_0+\Delta y) - f(x_0, y_0)}{\Delta y}$$
@@ -321,7 +502,7 @@
                 分段函数在分界点：必须用定义求
             </div>
 
-            <h3>3. 全微分</h3>
+            <h3 id="differential">3. 全微分</h3>
             <div class="formula-box">
                 $$dz = \frac{\partial z}{\partial x}dx + \frac{\partial z}{\partial y}dy$$
                 $$du = \frac{\partial u}{\partial x}dx + \frac{\partial u}{\partial y}dy + \frac{\partial u}{\partial z}dz$$
@@ -370,7 +551,7 @@
                 </div>
             </div>
 
-            <h3>7. 多元函数极值</h3>
+            <h3 id="extremum">7. 多元函数极值</h3>
             <h4>无条件极值</h4>
             <ol>
                 <li>求驻点：解方程组 $f_x = 0$, $f_y = 0$，得 $(x_0, y_0)$</li>
@@ -440,7 +621,7 @@
         <section id="integrals" class="section">
             <h2>二、重积分 (Multiple Integrals)</h2>
             
-            <h3>1. 二重积分</h3>
+            <h3 id="double-integral">1. 二重积分</h3>
             
             <h4>直角坐标</h4>
             <div class="grid">
@@ -476,7 +657,7 @@
                 </ul>
             </div>
 
-            <h3>2. 三重积分</h3>
+            <h3 id="triple-integral">2. 三重积分</h3>
             
             <h4>直角坐标 (先z后xy)</h4>
             <div class="formula-box">
@@ -506,7 +687,7 @@
         <section id="curves-surfaces" class="section">
             <h2>三、曲线与曲面积分 (Line and Surface Integrals)</h2>
             
-            <h3>1. 曲线积分</h3>
+            <h3 id="line-integral">1. 曲线积分</h3>
             
             <h4>第一类曲线积分 (对弧长)</h4>
             <div class="formula-box">
@@ -560,7 +741,7 @@
                 </div>
             </div>
 
-            <h3>2. 曲面积分</h3>
+            <h3 id="surface-integral">2. 曲面积分</h3>
             
             <h4>第一类曲面积分 (对面积)</h4>
             <div class="formula-box">
@@ -620,7 +801,7 @@
         <section id="series" class="section">
             <h2>四、无穷级数 (Infinite Series)</h2>
             
-            <h3>1. 常数项级数审敛法</h3>
+            <h3 id="convergence">1. 常数项级数审敛法</h3>
             
             <div class="theorem">
                 <div class="theorem-title">收敛的必要条件</div>
@@ -687,7 +868,7 @@
                 </ul>
             </div>
 
-            <h3>2. 幂级数</h3>
+            <h3 id="power-series">2. 幂级数</h3>
             <div class="formula-box">
                 形式：$$\sum a_n x^n$$
             </div>
@@ -763,23 +944,79 @@
     <button class="scroll-top" onclick="scrollToTop()">↑</button>
 
     <script>
+        // Toggle sidebar for mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('show');
+        }
+
+        // Update active navigation item
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item:not(.nav-sub-item)');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = window.innerWidth <= 768 ? 80 : 20;
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
-        // Show/hide scroll to top button
+        // Show/hide scroll to top button and update active nav
+        let ticking = false;
         window.addEventListener('scroll', function() {
-            const scrollTopButton = document.querySelector('.scroll-top');
-            if (window.pageYOffset > 300) {
-                scrollTopButton.classList.add('visible');
-            } else {
-                scrollTopButton.classList.remove('visible');
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    const scrollTopButton = document.querySelector('.scroll-top');
+                    if (window.pageYOffset > 300) {
+                        scrollTopButton.classList.add('visible');
+                    } else {
+                        scrollTopButton.classList.remove('visible');
+                    }
+                    
+                    updateActiveNav();
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
 
@@ -798,6 +1035,8 @@
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
+        }, {
+            threshold: 0.1
         });
 
         document.querySelectorAll('.section').forEach((section) => {
@@ -805,6 +1044,30 @@
             section.style.transform = 'translateY(20px)';
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(section);
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const burgerBtn = document.querySelector('.burger-btn');
+            
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(event.target) && !burgerBtn.contains(event.target) && sidebar.classList.contains('open')) {
+                    closeSidebar();
+                }
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+        });
+
+        // Initialize active nav on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateActiveNav();
         });
     </script>
 </body>
